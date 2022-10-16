@@ -28,11 +28,11 @@ public class Event extends AbstractEntity{
     private Long participantsEstimation;
 
     @ManyToOne
-    @JoinColumn(name="eventType_id", nullable=false)
+    @JoinColumn(name="eventType_id")
     private EventType eventType;
 
     @ManyToOne
-    @JoinColumn(name="club_id", nullable=false)
+    @JoinColumn(name="club_id")
     private Club club;
 
 
