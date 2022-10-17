@@ -7,6 +7,8 @@ import cccc.club_management.models.Teacher;
 import cccc.club_management.models.User;
 import cccc.club_management.repositories.ClubRepository;
 import cccc.club_management.repositories.CustomFileRepository;
+import cccc.club_management.repositories.TeacherRepository;
+import cccc.club_management.repositories.UserRepository;
 import cccc.club_management.service.ClubService;
 import cccc.club_management.service.TeacherService;
 import cccc.club_management.service.UserService;
@@ -33,6 +35,12 @@ public class ClubServiceImpl implements ClubService {
     private TeacherService teacherService;
 
     @Autowired
+    private TeacherRepository teacherRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private UserService userService;
 
     @Override
@@ -44,6 +52,37 @@ public class ClubServiceImpl implements ClubService {
     public Club getClubById(Long id) throws NotFoundException {
         if(this.clubRepository.findById(id).isPresent()) {
             return this.clubRepository.findById(id).get();
+        }else{
+            throw new NotFoundException();
+        }
+    }
+
+    @Override
+    public Club getClubByLeaderUsername(String username) throws NotFoundException {
+        User leader = this.userRepository.findByAccount_Username(username);
+        return this.clubRepository.findByLeader(leader);
+    }
+
+    @Override
+    public Club saveClubDetails(Club updatedClub) throws NotFoundException{
+        if(this.clubRepository.findById(updatedClub.getId()).isPresent()) {
+            Club club = this.clubRepository.findById(updatedClub.getId()).get();
+            club.setName(updatedClub.getName());
+            club.setEmail(updatedClub.getEmail());
+            club.setDescription(updatedClub.getDescription());
+            return this.clubRepository.save(club);
+        }else{
+            throw new NotFoundException();
+        }
+    }
+
+    @Override
+    public Club updateClubCoordinator(Long clubId, Long coordinatorId) throws NotFoundException{
+        if(this.clubRepository.findById(clubId).isPresent() && this.teacherRepository.findById(coordinatorId).isPresent()) {
+            Club club = this.clubRepository.findById(clubId).get();
+            Teacher coordinator = this.teacherRepository.findById(coordinatorId).get();
+            club.setCoordinator(coordinator);
+            return this.clubRepository.save(club);
         }else{
             throw new NotFoundException();
         }
@@ -92,10 +131,6 @@ public class ClubServiceImpl implements ClubService {
         return this.clubRepository.save(club);
     }
 
-/*    @Override
-    public Club saveClub(Club club) {
-        return this.clubRepository.save(club);
-    }*/
 
     @Override
     public void deleteClub(Long id) throws NotFoundException {

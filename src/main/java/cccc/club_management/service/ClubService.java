@@ -9,7 +9,9 @@ import java.util.List;
 public interface ClubService {
     List<Club> getClubs();
     Club getClubById(Long id) throws NotFoundException;
-//    Club saveClub(Club club);
+    Club getClubByLeaderUsername(String username) throws NotFoundException;
+    Club updateClubCoordinator(Long clubId, Long coordinatorId) throws NotFoundException;
+    Club saveClubDetails(Club club)  throws NotFoundException;
     Club saveClub(MultipartFile logo_file,
                   MultipartFile FSBrequest_file,
                   MultipartFile UCrequest_file,
