@@ -37,6 +37,11 @@ public class ClubController {
         return clubService.updateClubCoordinator(clubId, coordinatorId);
     }
 
+    @PutMapping("/{clubId}/status")
+    public Club updateClubStatus(@PathVariable(name = "clubId") Long clubId, @RequestBody boolean status) throws NotFoundException {
+        return clubService.updateClubStatus(clubId, status);
+    }
+
     @PostMapping("/details")
     public Club saveClubDetails(@RequestBody Club club) throws Exception {
         return this.clubService.saveClubDetails(club);

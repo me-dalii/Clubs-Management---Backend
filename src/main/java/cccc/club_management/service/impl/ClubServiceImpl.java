@@ -89,6 +89,17 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
+    public Club updateClubStatus(Long clubId, boolean status) throws NotFoundException{
+        if(this.clubRepository.findById(clubId).isPresent()) {
+            Club club = this.clubRepository.findById(clubId).get();
+            club.setStatus(status);
+            return this.clubRepository.save(club);
+        }else{
+            throw new NotFoundException();
+        }
+    }
+
+    @Override
     public Club saveClub(MultipartFile logo_file, MultipartFile FSBrequest_file, MultipartFile UCrequest_file, Long id, String name, String description, String email, Long coordinatorId, Long leaderId) throws Exception {
 
         Club club = new Club(id, name, description, email);
