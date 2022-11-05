@@ -2,7 +2,11 @@ package cccc.club_management;
 
 import cccc.club_management.enums.Role;
 import cccc.club_management.models.Account;
+import cccc.club_management.models.Club;
+import cccc.club_management.models.User;
 import cccc.club_management.service.AccountService;
+import cccc.club_management.service.ClubService;
+import cccc.club_management.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,11 +32,15 @@ public class ClubManagementApplication {
     }
 
     /*@Bean
-    CommandLineRunner run(AccountService accountService){
+    CommandLineRunner run(AccountService accountService, UserService userService){
         return args -> {
-          accountService.saveAccount(new Account("admin","admin", Role.ADMIN));
-          accountService.saveAccount(new Account("leader","leader", Role.LEADER));
-
+          Account account = new Account("admin","admin", Role.ADMIN,true,null);
+          accountService.saveAccount(account);
+          accountService.saveAccount(new Account("leader","leader", Role.LEADER,true,null));
+          User user = new User();
+          user.setAccount(account);
+          user.setFirstName("admin");
+          userService.saveUser(user);
         };
     }*/
 

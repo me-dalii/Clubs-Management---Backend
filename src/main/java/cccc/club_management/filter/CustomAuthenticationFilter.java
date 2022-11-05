@@ -1,9 +1,13 @@
 package cccc.club_management.filter;
 
+import cccc.club_management.enums.Role;
+import cccc.club_management.models.Account;
+import cccc.club_management.repositories.AccountRepository;
 import cccc.club_management.service.GradeService;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,6 +28,8 @@ import java.util.stream.Collectors;
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
+    @Autowired
+    public AccountRepository accountRepository;
 
     public CustomAuthenticationFilter(AuthenticationManager authenticationManager){
         this.authenticationManager = authenticationManager;
@@ -37,7 +43,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         log.info("password is : {}",password);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,password);
         return authenticationManager.authenticate(authenticationToken);
-
     }
 
     @Override
@@ -60,5 +65,11 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .sign(algorithm);
         response.setHeader("access_token", access_token);
         response.setHeader("refresh_token",refresh_token);
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,AuthenticationException failed) throws IOException, javax.servlet.ServletException{
+        System.out.println(failed.getMessage());
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
     }
 }

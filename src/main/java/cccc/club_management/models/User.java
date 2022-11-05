@@ -1,6 +1,7 @@
 package cccc.club_management.models;
 
 import cccc.club_management.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,5 +32,8 @@ public class User extends AbstractEntity{
     @JoinColumn(name="grade_id", referencedColumnName = "id")
     private Grade grade;
 
+    @OneToOne(mappedBy = "leader")
+    @JsonIgnore
+    private Club club;
 
 }

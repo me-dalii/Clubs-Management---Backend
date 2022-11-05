@@ -1,5 +1,6 @@
 package cccc.club_management.service.impl;
 
+import cccc.club_management.enums.Role;
 import cccc.club_management.exceptions.NotFoundException;
 import cccc.club_management.models.Account;
 import cccc.club_management.repositories.AccountRepository;
@@ -68,7 +69,11 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
         if(account == null){
             log.error("Account not found in the database");
             throw new UsernameNotFoundException("Account not found in the database");
-        }else{
+        }else if(account.getStatus() == null || !account.getStatus()){
+            log.error("Account not Active");
+            throw new UsernameNotFoundException("Account not active");
+        }
+        else{
             log.info("Account found in the database");
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
