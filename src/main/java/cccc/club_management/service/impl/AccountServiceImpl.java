@@ -3,6 +3,7 @@ package cccc.club_management.service.impl;
 import cccc.club_management.enums.Role;
 import cccc.club_management.exceptions.NotFoundException;
 import cccc.club_management.models.Account;
+import cccc.club_management.models.Club;
 import cccc.club_management.repositories.AccountRepository;
 import cccc.club_management.service.AccountService;
 import lombok.RequiredArgsConstructor;
@@ -79,5 +80,13 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(account.getRole().name()));
         return new User(account.getUsername(), account.getPassword(), authorities);
+    }
+
+    @Override
+    public Account updateAccountStatus(Long accountId, boolean status) throws NotFoundException{
+        Account account = this.getAccountById(accountId);
+        account.setStatus(status);
+        return this.accountRepository.save(account);
+
     }
 }

@@ -10,5 +10,5 @@ public interface AccountService {
     Account getAccountById(Long id) throws NotFoundException;
     Account saveAccount(Account account);
     void deleteAccount(Long id) throws NotFoundException;
-
+    Account updateAccountStatus(Long accountId, boolean status) throws NotFoundException;
 }

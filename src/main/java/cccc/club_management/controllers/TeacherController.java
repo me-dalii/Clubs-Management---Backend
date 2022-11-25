@@ -1,9 +1,7 @@
 package cccc.club_management.controllers;
 
 import cccc.club_management.exceptions.NotFoundException;
-import cccc.club_management.models.Role;
 import cccc.club_management.models.Teacher;
-import cccc.club_management.service.RoleService;
 import cccc.club_management.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

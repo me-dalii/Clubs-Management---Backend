@@ -2,7 +2,6 @@ package cccc.club_management.service.impl;
 
 import cccc.club_management.exceptions.NotFoundException;
 import cccc.club_management.models.User;
-import cccc.club_management.repositories.RoleRepository;
 import cccc.club_management.repositories.UserRepository;
 import cccc.club_management.service.UserService;
 import lombok.RequiredArgsConstructor;

@@ -31,7 +31,7 @@ public class ClubManagementApplication {
         SpringApplication.run(ClubManagementApplication.class, args);
     }
 
-    /*@Bean
+/*    @Bean
     CommandLineRunner run(AccountService accountService, UserService userService){
         return args -> {
           Account account = new Account("admin","admin", Role.ADMIN,true,null);
