@@ -44,4 +44,31 @@ public class EventServiceImpl implements EventService {
             throw new NotFoundException();
         }
     }
+
+    @Override
+    public List<Event> getEventsByClubId(Long id) {
+        return this.eventRepository.findAllByClubId(id);
+    }
+
+    @Override
+    public Event updateEventStatus(Long eventId, boolean status) throws NotFoundException {
+        Event event = this.getEventById(eventId);
+        event.setStatus(status);
+        return this.eventRepository.save(event);
+    }
+
+    @Override
+    public List<Event> getRejectedEvents() {
+        return this.eventRepository.findAllByStatusFalse();
+    }
+
+    @Override
+    public List<Event> getApprovedEvents() {
+        return this.eventRepository.findAllByStatusTrue();
+    }
+
+    @Override
+    public List<Event> getRequestedEvents() {
+        return this.eventRepository.findAllByStatusNull();
+    }
 }

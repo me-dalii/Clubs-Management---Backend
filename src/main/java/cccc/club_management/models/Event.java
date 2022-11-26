@@ -26,6 +26,7 @@ public class Event extends AbstractEntity{
     private Date endDate;
     private String place;
     private Long participantsEstimation;
+    private Boolean status;
 
     @ManyToOne
     @JoinColumn(name="eventType_id")

@@ -151,4 +151,9 @@ public class ClubServiceImpl implements ClubService {
             throw new NotFoundException();
         }
     }
+
+    @Override
+    public List<Club> getApprovedClubs() {
+        return clubRepository.findAllByLeaderAccountStatusTrue();
+    }
 }

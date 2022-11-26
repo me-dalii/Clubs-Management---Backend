@@ -11,4 +11,11 @@ public interface EventService {
     Event getEventById(Long id) throws NotFoundException;
     void saveEvent(Event event);
     void deleteEvent(Long id) throws NotFoundException;
+    List<Event> getEventsByClubId(Long id);
+
+    Event updateEventStatus(Long eventId, boolean status) throws NotFoundException;
+
+    List<Event> getRejectedEvents();
+    List<Event> getApprovedEvents();
+    List<Event> getRequestedEvents();
 }
