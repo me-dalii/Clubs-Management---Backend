@@ -1,10 +1,7 @@
 package cccc.club_management.controllers;
 
 import cccc.club_management.exceptions.NotFoundException;
-import cccc.club_management.models.Account;
-import cccc.club_management.models.Club;
 import cccc.club_management.models.Event;
-import cccc.club_management.service.ClubService;
 import cccc.club_management.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -61,5 +58,15 @@ public class EventController {
     @GetMapping("/rejected")
     public List<Event> getRejectedEvents(){
         return eventService.getRejectedEvents();
+    }
+
+    @GetMapping("/count")
+    public Long getTotalEvents(){
+        return eventService.getTotalEvents();
+    }
+
+    @GetMapping("/count/approved")
+    public Long getTotalApprovedEvents(){
+        return eventService.getTotalApprovedEvents();
     }
 }

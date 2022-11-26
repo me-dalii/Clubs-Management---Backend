@@ -71,4 +71,16 @@ public class ClubController {
     public List<Club> getApprovedClubs(){
         return clubService.getApprovedClubs();
     }
+
+    @GetMapping("/count/approved")
+    public Long getTotalApprovedClubs(){
+        return clubService.getTotalApprovedClubs();
+    }
+
+    @GetMapping("/count/requested")
+    public Long getTotalRequestedClubs(){
+        return clubService.getTotalRequestedClubs();
+    }
+
+
 }

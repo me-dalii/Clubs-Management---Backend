@@ -45,4 +45,19 @@ public class TeacherServiceImpl implements TeacherService {
             throw new NotFoundException();
         }
     }
+
+    @Override
+    public List<Teacher> getAvailableTeachers() {
+        return teacherRepository.findAllByClubNull();
+    }
+
+    @Override
+    public Long getTotalTeachers() {
+        return teacherRepository.count();
+    }
+
+    @Override
+    public Long getTotalActiveTeachers() {
+        return teacherRepository.countAllByClubNotNull();
+    }
 }

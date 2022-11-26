@@ -12,4 +12,7 @@ import java.util.List;
 public interface ClubRepository extends JpaRepository<Club, Long> {
     Club findByLeader(User leader);
     List<Club> findAllByLeaderAccountStatusTrue();
+    Long countAllByLeaderAccountStatusTrue();
+    Long countAllByLeaderAccountStatusNull();
+
 }

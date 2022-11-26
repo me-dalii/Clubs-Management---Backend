@@ -18,4 +18,7 @@ public interface EventService {
     List<Event> getRejectedEvents();
     List<Event> getApprovedEvents();
     List<Event> getRequestedEvents();
+
+    Long getTotalEvents();
+    Long getTotalApprovedEvents();
 }

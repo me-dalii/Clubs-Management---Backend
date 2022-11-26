@@ -156,4 +156,16 @@ public class ClubServiceImpl implements ClubService {
     public List<Club> getApprovedClubs() {
         return clubRepository.findAllByLeaderAccountStatusTrue();
     }
+
+    @Override
+    public Long getTotalApprovedClubs() {
+        return clubRepository.countAllByLeaderAccountStatusTrue();
+    }
+
+    @Override
+    public Long getTotalRequestedClubs() {
+        return clubRepository.countAllByLeaderAccountStatusNull();
+    }
+
+
 }

@@ -1,12 +1,14 @@
 package cccc.club_management.models;
 
 import cccc.club_management.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import java.util.Date;
 
 @Entity
@@ -24,5 +26,8 @@ public class Teacher extends AbstractEntity{
     private Date dob;
     private Gender gender;
 
+    @OneToOne(mappedBy = "coordinator")
+    @JsonIgnore
+    private Club club;
 
 }

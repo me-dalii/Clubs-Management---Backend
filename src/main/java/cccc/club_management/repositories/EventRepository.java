@@ -13,4 +13,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findAllByStatusNull();
     List<Event> findAllByStatusFalse();
 
+    Long countAllByStatusTrue();
+
 }

@@ -25,4 +25,9 @@ public interface ClubService {
     void deleteClub(Long id) throws NotFoundException;
 
     List<Club> getApprovedClubs();
+
+
+    Long getTotalApprovedClubs();
+
+    Long getTotalRequestedClubs();
 }

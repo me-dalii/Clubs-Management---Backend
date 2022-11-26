@@ -71,4 +71,14 @@ public class EventServiceImpl implements EventService {
     public List<Event> getRequestedEvents() {
         return this.eventRepository.findAllByStatusNull();
     }
+
+    @Override
+    public Long getTotalEvents() {
+        return this.eventRepository.count();
+    }
+
+    @Override
+    public Long getTotalApprovedEvents() {
+        return this.eventRepository.countAllByStatusTrue();
+    }
 }

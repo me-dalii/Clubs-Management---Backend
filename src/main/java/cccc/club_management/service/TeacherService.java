@@ -10,4 +10,10 @@ public interface TeacherService {
     Teacher getTeacherById(Long id) throws NotFoundException;
     void saveTeacher(Teacher teacher);
     void deleteTeacher(Long id) throws NotFoundException;
+
+    List<Teacher> getAvailableTeachers();
+
+    Long getTotalTeachers();
+
+    Long getTotalActiveTeachers();
 }
