@@ -1,6 +1,5 @@
 package cccc.club_management.models;
 
-import cccc.club_management.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,11 +18,12 @@ public class User extends AbstractEntity{
 
     private String firstName;
     private String lastName;
+    @Column(unique=true)
     private String cin;
+    @Column(unique=true)
     private String email;
     private String phone;
     private Date dob;
-    private Gender gender;
 
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="account_id", referencedColumnName = "id")

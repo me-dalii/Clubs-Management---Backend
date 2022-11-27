@@ -1,6 +1,5 @@
 package cccc.club_management.models;
 
-import cccc.club_management.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,11 +7,9 @@ import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor

@@ -7,9 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -19,6 +18,7 @@ import javax.persistence.OneToOne;
 @ToString
 public class Account extends AbstractEntity{
 
+    @Column(unique=true)
     private String username;
     private String password;
     private Role role;
