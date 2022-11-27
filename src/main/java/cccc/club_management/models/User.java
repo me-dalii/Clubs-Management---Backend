@@ -25,7 +25,7 @@ public class User extends AbstractEntity{
     private String phone;
     private Date dob;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="account_id", referencedColumnName = "id")
     private Account account;
 

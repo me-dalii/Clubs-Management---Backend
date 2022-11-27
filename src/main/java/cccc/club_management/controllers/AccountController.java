@@ -38,6 +38,7 @@ public class AccountController {
 
     @PutMapping("/status/{accountId}")
     public Account updateAccountStatus(@PathVariable(name = "accountId") Long accountId, @RequestBody boolean status) throws NotFoundException {
+        System.out.println(accountId + " " + status);
         return accountService.updateAccountStatus(accountId, status);
     }
 }

@@ -31,12 +31,11 @@ public class ClubManagementApplication {
         SpringApplication.run(ClubManagementApplication.class, args);
     }
 
-/*    @Bean
+    /*@Bean
     CommandLineRunner run(AccountService accountService, UserService userService){
         return args -> {
           Account account = new Account("admin","admin", Role.ADMIN,true,null);
           accountService.saveAccount(account);
-          accountService.saveAccount(new Account("leader","leader", Role.LEADER,true,null));
           User user = new User();
           user.setAccount(account);
           user.setFirstName("admin");

@@ -10,7 +10,6 @@ public interface ClubService {
     List<Club> getClubs();
     Club getClubById(Long id) throws NotFoundException;
     Club getClubByLeaderUsername(String username) throws NotFoundException;
-    Club updateClubStatus(Long id, boolean status) throws NotFoundException;
     Club updateClubCoordinator(Long clubId, Long coordinatorId) throws NotFoundException;
     Club saveClubDetails(Club club)  throws NotFoundException;
     Club saveClub(MultipartFile logo_file,

@@ -12,6 +12,7 @@ import cccc.club_management.repositories.UserRepository;
 import cccc.club_management.service.ClubService;
 import cccc.club_management.service.TeacherService;
 import cccc.club_management.service.UserService;
+import cccc.club_management.tools.mail.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,21 +90,9 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
-    public Club updateClubStatus(Long clubId, boolean status) throws NotFoundException{
-        if(this.clubRepository.findById(clubId).isPresent()) {
-            Club club = this.clubRepository.findById(clubId).get();
-            club.setStatus(status);
-            return this.clubRepository.save(club);
-        }else{
-            throw new NotFoundException();
-        }
-    }
-
-    @Override
     public Club saveClub(MultipartFile logo_file, MultipartFile FSBrequest_file, MultipartFile UCrequest_file, Long id, String name, String description, String email, Long coordinatorId, Long leaderId) throws Exception {
 
         Club club = new Club(id, name, description, email);
-        System.out.println(club);
         User leader;
         if(leaderId != null){
             leader = this.userService.getUserById(leaderId);
@@ -139,13 +128,17 @@ public class ClubServiceImpl implements ClubService {
             club.setUCrequest(savedUCrequest);
         }
 
-        return this.clubRepository.save(club);
+        club = this.clubRepository.save(club);
+        EmailService emailService = new EmailService();
+        emailService.sendEmail(club.getEmail(), "Club Registration", " Your Club Registration have been received stay tuned for confirmation");
+        return club;
     }
 
 
     @Override
     public void deleteClub(Long id) throws NotFoundException {
         if(this.clubRepository.existsById(id)) {
+
             this.clubRepository.deleteById(id);
         }else{
             throw new NotFoundException();

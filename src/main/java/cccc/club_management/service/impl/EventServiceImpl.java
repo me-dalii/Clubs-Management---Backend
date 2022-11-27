@@ -1,9 +1,11 @@
 package cccc.club_management.service.impl;
 
 import cccc.club_management.exceptions.NotFoundException;
+import cccc.club_management.models.Account;
 import cccc.club_management.models.Event;
 import cccc.club_management.repositories.EventRepository;
 import cccc.club_management.service.EventService;
+import cccc.club_management.tools.mail.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,8 +55,17 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event updateEventStatus(Long eventId, boolean status) throws NotFoundException {
         Event event = this.getEventById(eventId);
+        if(event.getStatus() == status)
+            return event;
         event.setStatus(status);
-        return this.eventRepository.save(event);
+        event = this.eventRepository.save(event);
+        EmailService emailService = new EmailService();
+        if(event.getStatus()){
+            emailService.sendEmail(event.getClub().getEmail(), event.getTitle() + " Event Status", " Your request for the "+event.getTitle() + " event is approved.");
+        }else{
+            emailService.sendEmail(event.getClub().getEmail(), event.getTitle() + " Event Status", " Your Club for the "+event.getTitle() + " event is rejected.");
+        }
+        return event;
     }
 
     @Override

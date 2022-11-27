@@ -6,6 +6,7 @@ import cccc.club_management.models.Account;
 import cccc.club_management.models.Club;
 import cccc.club_management.repositories.AccountRepository;
 import cccc.club_management.service.AccountService;
+import cccc.club_management.tools.mail.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +87,13 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
     public Account updateAccountStatus(Long accountId, boolean status) throws NotFoundException{
         Account account = this.getAccountById(accountId);
         account.setStatus(status);
-        return this.accountRepository.save(account);
-
+        account = this.accountRepository.save(account);
+        EmailService emailService = new EmailService();
+        if(account.getStatus()){
+            emailService.sendEmail(account.getUser().getClub().getEmail(), "Club Status", " Your Club "+account.getUser().getClub().getName() + " is now active.");
+        }else{
+            emailService.sendEmail(account.getUser().getClub().getEmail(), "Club Status", " Your Club "+account.getUser().getClub().getName() + " got rejected.");
+        }
+        return account;
     }
 }

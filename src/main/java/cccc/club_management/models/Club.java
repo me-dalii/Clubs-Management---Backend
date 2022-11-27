@@ -21,7 +21,6 @@ public class Club extends AbstractEntity{
     @Column(unique=true)
     private String name;
     private String description;
-    private Boolean status;
     @Column(unique=true)
     private String email;
 
